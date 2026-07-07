@@ -207,9 +207,19 @@
         else if (montantFCFA >= 100000 && montantFCFA <= 300000) pourcentageFrais = 0.02;
         else if (montantFCFA >= 300001 && montantFCFA <= 500000) pourcentageFrais = 0.01;
 
-        const montantFraisFCFA = montantFCFA * pourcentageFrais;
+const montantFraisFCFA = montantFCFA * pourcentageFrais;
         const montantNetFCFA = montantFCFA - montantFraisFCFA;
-        const montantDirhamsClient = Math.ceil(montantNetFCFA * TAUX_CLIENT_FIXE);
+        
+        const montantBrutDirhams = montantNetFCFA * TAUX_CLIENT_FIXE;
+
+        const partieDecimale = montantBrutDirhams - Math.floor(montantBrutDirhams);
+
+        let montantDirhamsClient;
+        if (partieDecimale > 0.5) {
+            montantDirhamsClient = Math.ceil(montantBrutDirhams);  
+        } else {
+            montantDirhamsClient = Math.floor(montantBrutDirhams);
+        }
 
         document.getElementById('resInitial').innerText = montantFCFA.toLocaleString();
         document.getElementById('resFraisPourcent').innerText = pourcentageFrais * 100;
