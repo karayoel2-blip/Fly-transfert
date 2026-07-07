@@ -215,7 +215,7 @@ const montantFraisFCFA = montantFCFA * pourcentageFrais;
         const partieDecimale = montantBrutDirhams - Math.floor(montantBrutDirhams);
 
         let montantDirhamsClient;
-        if (partieDecimale > 0.5) {
+        if (partieDecimale >= 0.5) {
             montantDirhamsClient = Math.ceil(montantBrutDirhams);  
         } else {
             montantDirhamsClient = Math.floor(montantBrutDirhams);
